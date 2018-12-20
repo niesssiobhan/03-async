@@ -2,18 +2,18 @@
 
 let fs = require('fs');
 
-fs.readFile('./files/test.txt', 'UTF-8', (err,data) => {
+fs.readFile('./files/' + file[0], 'UTF-8', (err,data) => {
   if ( err ) { throw err; }
-  console.log('before', data);
-});
-
-let num = Math.random();
-fs.writeFile('./files/test.txt',  num, (err) => {
-  if (err) throw err;
-  console.log('The file has been saved!', num);
-});
-
-fs.readFile('./files/test.txt', 'UTF-8', (err,data) => {
-  if ( err ) { throw err; }
-  console.log('after', data);
+  console.log(data.toString());
+  
+  let num = Math.random().toString();
+  fs.writeFile('./files/' + file[0],  num, (err) => {
+    if (err) throw err;
+    console.log('Text changed', num);
+    
+    fs.readFile('./files/' + file[0], 'UTF-8', (err,data) => {
+      if ( err ) { throw err; }
+      console.log(data.toString());
+    });
+  });
 });
